@@ -215,7 +215,7 @@ class ExecuteQueryHandler extends Handler {
           types.add(FIELD_TYPE_VARCHAR);
           types.add(0);
           values.add(s.length);
-          values.addAll(s.charCodes);
+          values.addAll(s.charCodes());
           
           // TODO: if you send a double value for a decimal field, it doesn't like it
 //          types.add(FIELD_TYPE_FLOAT);
@@ -255,7 +255,7 @@ class ExecuteQueryHandler extends Handler {
           types.add(FIELD_TYPE_VARCHAR);
           types.add(0);
           values.add(s.length);
-          values.addAll(s.charCodes);
+          values.addAll(s.charCodes());
         }
       }
     }
@@ -442,7 +442,7 @@ class BinaryDataPacket implements DataPacket {
             }
           }
           
-          _values[i] = new Date(year, month, day, hours, minutes, seconds, (billionths / 1000000).toInt());
+          _values[i] = new Date(year, month, day, hours, minutes, seconds, (billionths ~/ 1000000).toInt());
           log.fine("Value: ${_values[i]}");
           break;
         case FIELD_TYPE_TIME:
@@ -469,7 +469,7 @@ class BinaryDataPacket implements DataPacket {
             }
           }
           _values[i] = new Duration(days: days * sign, hours: hours * sign, minutes: minutes * sign, 
-              seconds: seconds * sign, milliseconds: (billionths / 1000000).toInt() * sign);
+              seconds: seconds * sign, milliseconds: (billionths ~/ 1000000).toInt() * sign);
           break;
         case FIELD_TYPE_YEAR:
           log.fine("YEAR");
