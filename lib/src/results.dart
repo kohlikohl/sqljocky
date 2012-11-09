@@ -30,10 +30,6 @@ class ResultsIterator implements Iterator<dynamic> {
   
   ResultsIterator( Results results ) {
     _results = results;
-    
-    print('ITERATOR');
-    print( results.count );
-    print( hasNext() );
   }
   
   bool hasNext () {
