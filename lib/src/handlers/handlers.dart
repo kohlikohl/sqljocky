@@ -42,7 +42,7 @@ class OkPacket {
   String toString() => "OK: affected rows: $affectedRows, insert id: $insertId, server status: $serverStatus, message: $message";
 }
 
-class MySqlError {
+class MySqlError implements Exception{
   int _errorNumber;
   String _sqlState;
   String _message;
@@ -105,6 +105,7 @@ abstract class Handler {
       } else {
         OkPacket okPacket = new OkPacket(response);
         log.fine(okPacket.toString());
+        print(okPacket.toString());
         return okPacket;
       }
     } else if (response[0] == PACKET_ERROR) {
